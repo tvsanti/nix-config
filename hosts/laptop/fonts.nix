@@ -5,7 +5,8 @@
       fira-code
       fira-code-symbols
       hack-font
-      (nerdfonts.override { fonts = [ "FiraCode" "Hack"]; })
+      nerd-fonts._0xproto
+      nerd-fonts.droid-sans-mono
     ];
     fontconfig.antialias = true;
   };
