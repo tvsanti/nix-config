@@ -1,5 +1,5 @@
 {
-  home-manager.users.santiago = { pkgs, ... }: {
+  home-manager.users.santiago = { pkgs, scripts, ... }: {
     imports = [ ./alacritty.nix ./screens.nix ];
     # Allow unfree packages
     xsession = {
@@ -89,6 +89,7 @@
     nixpkgs.config.allowUnfree = true;
     home.packages = with pkgs;
       [
+        scripts.clipscrot
         pkgs.nixfmt-classic
         xsel # managing Xorg clipboard
         cachix
