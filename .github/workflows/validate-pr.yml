@@ -15,11 +15,11 @@ jobs:
       with:
         script: |
           const checklist = [
-            "Answer:",
-            "Yes / No (If yes, explain why)",
-            "Yes / No (If no, explain why)",
-            "Yes / No (If yes, link them)",
-            "Yes / No (If no, explain why)"
+            "- [x] Answer:",
+            "- [x] Yes / No (If yes, explain why)",
+            "- [x] Yes / No (If no, explain why)",
+            "- [x] Yes / No (If yes, link them)",
+            "- [x] Yes / No (If no, explain why)"
           ];
 
           const prBody = context.payload.pull_request.body || "";
