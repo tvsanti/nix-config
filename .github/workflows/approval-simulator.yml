@@ -1,0 +1,33 @@
+name: Simulador de Aprobación de PR
+
+on:
+  pull_request:
+    types: [opened, reopened, synchronize] # Se ejecuta al abrir, reabrir o hacer push a la PR
+
+jobs:
+  simulate_approval:
+    runs-on: ubuntu-latest
+    steps:
+      - name: ¡Hola! Iniciando simulación de aprobación...
+        run: echo "Este es un simulador para probar las reglas de protección de rama."
+
+      - name: Decidir si la simulación pasa o falla
+        id: decide_status
+        run: |
+          # --- CÓMO PROBAR ---
+          # 1. Para que este check PASE: No hagas nada. Por defecto, terminará exitosamente.
+          # 2. Para que este check FALLE: Descomenta la siguiente línea y haz un push.
+          # exit 1 
+          # -------------------
+
+          echo "La simulación de aprobación ha terminado."
+          echo "Si 'exit 1' no está descomentado, este paso PASARÁ."
+          echo "Si 'exit 1' está descomentado, este paso FALLARÁ."
+
+      - name: Mensaje de resultado de la simulación
+        if: success()
+        run: "echo '::notice:: 🎉 La simulación de aprobación ha pasado exitosamente. Esta PR puede ser fusionada (si no hay otros checks).'"
+
+      - name: Mensaje de fallo de la simulación
+        if: failure()
+        run: "echo ::error:: ❌ La simulación de aprobación ha fallado. Esta PR NO puede ser fusionada hasta que el check pase."
