@@ -17,6 +17,7 @@
   networking = {
     hostName = "pc-work-home";
     networkmanager.enable = true;
+    firewall.enable = false; # For tailscale
   };
 
   time.timeZone = "Europe/Madrid";
