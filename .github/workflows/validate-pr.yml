@@ -16,10 +16,7 @@ jobs:
         script: |
           const checklist = [
             "- [x] Answer:",
-            "- [x] Yes / No (If yes, explain why)",
-            "- [x] Yes / No (If no, explain why)",
-            "- [x] Yes / No (If yes, link them)",
-            "- [x] Yes / No (If no, explain why)"
+            "- [x] Answer:",
           ];
 
           const prBody = context.payload.pull_request.body || "";
