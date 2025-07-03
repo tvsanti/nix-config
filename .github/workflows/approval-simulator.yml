@@ -1,7 +1,7 @@
 name: Validar Criterios de Revisor por Checkboxes
 
 on:
-  pull_request:
+  check_revisor_criterias:
     types: [opened, reopened, synchronize, edited] # 'edited' es clave para cuando el revisor marca las casillas
 
 jobs:
