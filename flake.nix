@@ -25,7 +25,8 @@
             home-manager.nixosModules.home-manager
             { home-manager.extraSpecialArgs = specialArgs; }
             ./hosts/laptop/configuration.nix
-            ./home/default.nix
+            ./home/home.nix
+            ./common/default.nix
           ];
         };
 
@@ -37,10 +38,11 @@
             home-manager.nixosModules.home-manager
             { home-manager.extraSpecialArgs = specialArgs; }
             ./hosts/pc-work-home/configuration.nix
-            ./home/default.nix
+            ./home/home.nix
+            ./common/default.nix
           ];
         };
-      
+
       };
     };
 }

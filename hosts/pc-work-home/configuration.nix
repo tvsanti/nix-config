@@ -3,10 +3,6 @@
 {
   imports = [
     ./hardware-configuration.nix
-    ./audio.nix
-    ./fonts.nix
-    ./bluetooth.nix
-    ./java.nix
   ];
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
@@ -17,7 +13,7 @@
   networking = {
     hostName = "pc-work-home";
     networkmanager.enable = true;
-    firewall.enable = false; # For tailscale
+    firewall.enable = false; # For tails
   };
 
   time.timeZone = "Europe/Madrid";

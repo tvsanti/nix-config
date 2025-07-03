@@ -3,10 +3,6 @@
 {
   imports = [
     ./hardware-configuration.nix
-    ./audio.nix
-    ./fonts.nix
-    ./bluetooth.nix
-    ./java.nix
   ];
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
