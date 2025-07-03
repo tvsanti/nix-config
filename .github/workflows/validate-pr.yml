@@ -1,0 +1,32 @@
+name: Validate Pull Request Checklist
+
+on:
+  pull_request:
+    types: [opened, edited, synchronize]
+
+jobs:
+  validate-checklist:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Check PR Description
+      id: check-description
+      uses: actions/github-script@v6
+      with:
+        script: |
+          const checklist = [
+            "Answer:",
+            "Yes / No (If yes, explain why)",
+            "Yes / No (If no, explain why)",
+            "Yes / No (If yes, link them)",
+            "Yes / No (If no, explain why)"
+          ];
+
+          const prBody = context.payload.pull_request.body || "";
+          const missingItems = checklist.filter(item => !prBody.includes(item));
+
+          if (missingItems.length > 0) {
+            core.setFailed(`Checklist incomplete. Missing items: ${missingItems.join(", ")}`);
+          } else {
+            core.info("Checklist is complete.");
+          }
