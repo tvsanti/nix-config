@@ -15,7 +15,7 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   networking = {
-    hostName = "laptop";
+    hostName = "pc-work-home";
     networkmanager.enable = true;
   };
 
