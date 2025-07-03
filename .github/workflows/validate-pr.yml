@@ -1,5 +1,6 @@
 name: Validate Pull Request Checklist
 
+
 on:
   pull_request:
     types: [opened, edited, synchronize]
