@@ -2,28 +2,28 @@ name: Validate Pull Request Checklist
 
 on:
   pull_request:
-    types: [opened, edited, synchronize]
+    types: [opened, edited, synchronize] # Trigger workflow on PR events
 
 jobs:
   validate-checklist:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest # Use Ubuntu virtual machine
 
     steps:
     - name: Check PR Description
       id: check-description
-      uses: actions/github-script@v6
+      uses: actions/github-script@v6 # Run custom JavaScript code
       with:
         script: |
           const checklist = [
-            "- [x] Answer:",
-            "- [x] Answer:",
+            "- [x] Answer:", // First checklist item
+            "- [x] Answer:", // Second checklist item
           ];
 
-          const prBody = context.payload.pull_request.body || "";
-          const missingItems = checklist.filter(item => !prBody.includes(item));
+          const prBody = context.payload.pull_request.body || ""; // Get PR description
+          const missingItems = checklist.filter(item => !prBody.includes(item)); // Check for missing items
 
           if (missingItems.length > 0) {
-            core.setFailed(`Checklist incomplete. Missing items: ${missingItems.join(", ")}`);
+            core.setFailed(`Checklist incomplete. Missing items: ${missingItems.join(", ")}`); // Fail if incomplete
           } else {
-            core.info("Checklist is complete.");
+            core.info("Checklist is complete."); // Log success if complete
           }

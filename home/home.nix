@@ -134,6 +134,7 @@
     services.sxhkd.enable = true;
     services.sxhkd.keybindings = { "super + o" = "firefox"; };
 
+
     programs.fzf.enable = true;
     programs.zsh = {
       enable = true;
