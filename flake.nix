@@ -28,6 +28,19 @@
             ./home/default.nix
           ];
         };
+
+        pc-work-home = nixpkgs.lib.nixosSystem rec {
+          inherit system;
+          specialArgs = { scripts = scripts.packages.x86_64-linux; };
+
+          modules = [
+            home-manager.nixosModules.home-manager
+            { home-manager.extraSpecialArgs = specialArgs; }
+            ./hosts/pc-work-home/configuration.nix
+            ./home/default.nix
+          ];
+        };
+      
       };
     };
 }
