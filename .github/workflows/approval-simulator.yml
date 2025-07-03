@@ -1,0 +1,70 @@
+name: Validar Criterios de Revisor por Checkboxes
+
+on:
+  pull_request:
+    types: [opened, reopened, synchronize, edited] # 'edited' es clave para cuando el revisor marca las casillas
+
+jobs:
+  check_revisor_criterias:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout del código
+        uses: actions/checkout@v4
+
+      - name: Extraer y validar checkboxes del revisor
+        id: validate_checkboxes
+        run: |
+          PR_NUMBER=${{ github.event.pull_request.number }}
+          echo "Obteniendo descripción de PR #$PR_NUMBER..."
+
+          # Obtener el cuerpo (descripción) de la PR usando la GitHub CLI
+          PR_BODY=$(gh pr view $PR_NUMBER --json body --jq '.body')
+          
+          echo "--- Contenido de la descripción de la PR ---"
+          echo "$PR_BODY"
+          echo "------------------------------------------"
+
+          # Extracción de la sección de "Criterios de Aprobación de Entendimiento"
+          # Es crucial para solo validar los checkboxes relevantes para el revisor.
+          # Este 'awk' buscará la sección entre el título '## 🚦 Criterios de Aprobación de Entendimiento' y la siguiente '---'.
+          # Si la sección no existe, awk devolverá vacío. El '|| true' evita que awk falle si no encuentra la sección.
+          REVISOR_CHECKBOXES_SECTION=$(echo "$PR_BODY" | awk '/## 🚦 Criterios de Aprobación de Entendimiento/,/---/ {
+              if ($0 ~ /^## 🚦 Criterios de Aprobación de Entendimiento/) { in_section = 1; next }
+              if ($0 ~ /^---/) { in_section = 0 }
+              if (in_section) { print }
+          }' || true)
+
+          if [ -z "$REVISOR_CHECKBOXES_SECTION" ]; then
+            echo "::error::🚨 No se encontró la sección 'Criterios de Aprobación de Entendimiento' en la descripción de la PR. Asegúrate de usar la plantilla correcta."
+            exit 1
+          fi
+
+          echo "--- Sección de checkboxes del revisor ---"
+          echo "$REVISOR_CHECKBOXES_SECTION"
+          echo "---------------------------------------"
+
+          # Contar checkboxes sin marcar en la sección del revisor
+          # Esto busca líneas que empiecen con '- [' y contengan un espacio en blanco entre los corchetes.
+          UNMARKED_REVISOR_CHECKBOXES=$(echo "$REVISOR_CHECKBOXES_SECTION" | grep -oP '^- \[\s*\s*\].*' | wc -l)
+
+          echo "Número de checkboxes del revisor sin marcar: $UNMARKED_REVISOR_CHECKBOXES"
+
+          if [ "$UNMARKED_REVISOR_CHECKBOXES" -gt 0 ]; then
+            echo "::error::🚨 El revisor AÚN NO ha marcado todos los 'Criterios de Aprobación de Entendimiento'. Por favor, Revisor, edita esta PR y marca los checkboxes necesarios."
+            echo "status=pending_revisor_approval" >> $GITHUB_OUTPUT
+            exit 1 # Esto hará que el job falle y bloquee la fusión.
+          else
+            echo "::notice::✅ ¡Todos los criterios de aprobación del revisor han sido marcados! La PR puede fusionarse."
+            echo "status=approved_by_revisor" >> $GITHUB_OUTPUT
+          fi
+        env:
+          GH_TOKEN: ${{ github.token }} # Permite al Action usar la GitHub CLI para leer la PR.
+
+      - name: Mensaje de guía para el revisor (solo si la aprobación está pendiente)
+        if: steps.validate_checkboxes.outputs.status == 'pending_revisor_approval'
+        run: |
+          echo "### ⚠️ Requiere Aprobación de Entendimiento del Revisor ⚠️" >> $GITHUB_STEP_SUMMARY
+          echo "---" >> $GITHUB_STEP_SUMMARY
+          echo "Estimado revisor, para que esta Pull Request pueda fusionarse, es necesario que **edites la descripción de la PR y marques todos los *checkboxes*** en la sección 'Criterios de Aprobación de Entendimiento'." >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "Una vez marcados, guarda la descripción y este check se actualizará automáticamente." >> $GITHUB_STEP_SUMMARY
