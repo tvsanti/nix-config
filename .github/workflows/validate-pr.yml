@@ -15,8 +15,8 @@ jobs:
       with:
         script: |
           const checklist = [
-            "- [x] Answer:", // First checklist item
-            "- [x] Answer:", // Second checklist item
+            "- [x] Answer 1:", // First checklist item
+            "- [x] Answer 2:", // Second checklist item
           ];
 
           const prBody = context.payload.pull_request.body || ""; // Get PR description
