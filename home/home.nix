@@ -120,9 +120,9 @@
         go
         spotify
         discord
-
+        postman
         clang # I just need it to build tree-sitter grammars in emacs
-
+        lxappearance
         # TODO: Maybe put this somewhere else
         (google-cloud-sdk.withExtraComponents
           ([ google-cloud-sdk.components.app-engine-go ]))
