@@ -3,6 +3,20 @@ name: Validate Pull Request Checklist
 on:
   pull_request:
     types: [opened, edited, synchronize] # Trigger workflow on PR events
+  workflow_dispatch:
+    inputs:
+      question_1:
+        description: 'Question 1'
+        required: true
+        default: 'yes'
+      question_2:
+        description: 'Question 2'
+        required: false      
+        default: 'no'
+      question_3:
+        description: 'Question 3'
+        required: false
+        default: 'maybe'   
 
 jobs:
   validate-checklist:

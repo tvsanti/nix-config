@@ -7,7 +7,7 @@ Ensure that the hostname in each `configuration.nix` matches your desired hostna
 ### Steps:
 1. Set the hostname:
    ```bash
-   hostnamectl set-hostname my-super-pc
+   sudo hostname my-super-pc
    ```
 2. Deploy the configuration:
    ```bash
