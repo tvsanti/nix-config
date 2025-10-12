@@ -120,6 +120,7 @@
         go
         discord
         ledger-live-desktop
+        eksctl
         postman
         clang # I just need it to build tree-sitter grammars in emacs
         lxappearance
