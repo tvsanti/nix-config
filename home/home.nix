@@ -118,8 +118,8 @@
         vagrant
         podman-compose
         go
-        spotify
         discord
+        ledger-live-desktop
         postman
         clang # I just need it to build tree-sitter grammars in emacs
         lxappearance

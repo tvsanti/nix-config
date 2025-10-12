@@ -31,9 +31,17 @@
     LC_TELEPHONE = "es_ES.UTF-8";
     LC_TIME = "es_ES.UTF-8";
   };
-
+  services.udev.packages = [ pkgs.ledger-udev-rules ];
   environment.pathsToLink =
     [ "/libexec" ]; # links /libexec from derivations to /run/current-system/sw
+
+  services.jellyfin.enable = true;
+  environment.systemPackages = [
+    pkgs.jellyfin
+    pkgs.jellyfin-web
+    pkgs.jellyfin-ffmpeg
+  ];
+
   services.xserver = {
     videoDrivers = [ "modesetting" ];
     enable = true;
