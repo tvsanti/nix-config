@@ -112,6 +112,7 @@
         kubernetes-helm
         kubectl
         kubectx
+        awscli
         helmfile
         kustomize
         # TODO: Maybe in virtualization
