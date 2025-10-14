@@ -111,6 +111,7 @@
         # TODO: Maybe these all in kubernetes-something
         kubernetes-helm
         kubectl
+        minikube
         kubectx
         awscli
         helmfile
