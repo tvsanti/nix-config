@@ -43,6 +43,19 @@
           ];
         };
 
+        pc-xabia-home = nixpkgs.lib.nixosSystem rec {
+          inherit system;
+          specialArgs = { scripts = scripts.packages.x86_64-linux; };
+
+          modules = [
+            home-manager.nixosModules.home-manager
+            { home-manager.extraSpecialArgs = specialArgs; }
+            ./hosts/pc-xabia-home/configuration.nix
+            ./home/home.nix
+            ./common/default.nix
+          ];
+        };
+
         pc-work-office = nixpkgs.lib.nixosSystem rec {
           inherit system;
           specialArgs = { scripts = scripts.packages.x86_64-linux; };
