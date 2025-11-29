@@ -186,7 +186,10 @@
     };
     programs.mpv = {
       enable = true;
-      config = { save-position-on-quit = true; };
+      config = {
+         save-position-on-quit = true; 
+         "vo" = "gpu-next";
+      };
     };
     # Install firefox.
     programs.firefox.enable = true;
