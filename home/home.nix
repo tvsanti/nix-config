@@ -1,5 +1,5 @@
 {
-  home-manager.users.santiago = { pkgs, ... }: {
+  home-manager.users.santiago = { pkgs, inputs, ... }: {
     imports = [ ./alacritty.nix ./screens.nix ];
     # Allow unfree packages
     xsession = {
@@ -124,7 +124,7 @@
         eksctl
         postman
         claude-code
-        opencode
+        inputs.opencode.packages.${pkgs.system}.default
         clang # I just need it to build tree-sitter grammars in emacs
         lxappearance
         # TODO: Maybe put this somewhere else
