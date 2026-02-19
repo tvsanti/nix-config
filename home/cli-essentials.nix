@@ -29,7 +29,7 @@
   jwt-cli # decode jwt in the cli with `jwt decode`
   dig
   progress # see progress of cp, mv and dd in the terminal with `watch progress`
-
+  gh
   just # command line runner
   libnotify # sending notifications to dunst
 
