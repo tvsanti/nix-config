@@ -138,7 +138,6 @@
     services.sxhkd.enable = true;
     services.sxhkd.keybindings = { "super + o" = "firefox"; };
 
-
     programs.fzf.enable = true;
     programs.zsh = {
       enable = true;
@@ -173,7 +172,10 @@
 
     programs.bash.enable = true;
 
-    programs.direnv.enable = true;
+    programs.direnv = {
+      enable = true;
+      nix-direnv.enable = true;
+    };
 
     programs.git = {
       enable = true;
@@ -188,13 +190,13 @@
     programs.mpv = {
       enable = true;
       config = {
-         save-position-on-quit = true; 
-         "vo" = "gpu-next";
+        save-position-on-quit = true;
+        "vo" = "gpu-next";
       };
     };
     # Install firefox.
     programs.firefox.enable = true;
-    
+
     programs.chromium.enable = true;
 
     # The state version is required and should stay at the version you
