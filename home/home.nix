@@ -100,7 +100,7 @@
         python3 # TODO: In nixos config?
         ntfs3g # TODO: In nixos config?
         gnupg
-        _1password
+        _1password-cli
         deluge
         slack
         inetutils # for telnet (TODO: In cli-essentials.nix?)
@@ -123,6 +123,7 @@
         ledger-live-desktop
         eksctl
         postman
+        teams-for-linux
         claude-code
         inputs.opencode.packages.${pkgs.system}.default
         clang # I just need it to build tree-sitter grammars in emacs
@@ -152,7 +153,7 @@
       defaultKeymap = "emacs";
 
       # Move across words with Ctrl + Left/Right
-      initExtra = ''
+      initContent = ''
         bindkey "^[[1;5C" forward-word
         bindkey "^[[1;5D" backward-word
       '';
