@@ -125,7 +125,7 @@
         postman
         teams-for-linux
         claude-code
-        inputs.opencode.packages.${pkgs.system}.default
+        # inputs.opencode.packages.${pkgs.system}.default
         clang # I just need it to build tree-sitter grammars in emacs
         lxappearance
         # TODO: Maybe put this somewhere else
