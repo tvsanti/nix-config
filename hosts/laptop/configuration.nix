@@ -61,8 +61,8 @@
         primary = false;
       }
     ];
-    layout = "es";
-    xkbOptions = "eurosign:e";
+    xkb.layout = "es";
+    xkb.options = "eurosign:e";
   };
 
   console.keyMap = "es";

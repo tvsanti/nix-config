@@ -35,12 +35,6 @@
   environment.pathsToLink =
     [ "/libexec" ]; # links /libexec from derivations to /run/current-system/sw
 
-  services.jellyfin.enable = true;
-  environment.systemPackages = [
-    pkgs.jellyfin
-    pkgs.jellyfin-web
-    pkgs.jellyfin-ffmpeg
-  ];
 
   services.xserver = {
     videoDrivers = [ "modesetting" ];
@@ -70,8 +64,8 @@
         primary = false;
       }
     ];
-    layout = "es";
-    xkbOptions = "eurosign:e";
+    xkb.layout = "es";
+    xkb.options = "eurosign:e";
   };
 
   console.keyMap = "es";
