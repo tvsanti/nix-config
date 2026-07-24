@@ -2,8 +2,8 @@
   description = "A very basic flake";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-25.05";
-    home-manager.url = "github:nix-community/home-manager/release-25.05";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    home-manager.url = "github:nix-community/home-manager/master";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     opencode.url = "github:anomalyco/opencode?ref=v1.1.51";
   };

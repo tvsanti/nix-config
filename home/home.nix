@@ -89,7 +89,7 @@
     nixpkgs.config.allowUnfree = true;
     home.packages = with pkgs;
       [
-        pkgs.nixfmt-classic
+        pkgs.nixfmt
         xsel # managing Xorg clipboard
         cachix
         anki
@@ -105,12 +105,12 @@
         slack
         inetutils # for telnet (TODO: In cli-essentials.nix?)
         krew
-        jetbrains.idea-community
+        jetbrains.idea
         feh # image viewer
         # TODO: Maybe these all in kubernetes-something
         kubernetes-helm
         kubectl
-        minikube
+        (lib.lowPrio minikube) # minikube bundles its own kubectl; let the kubectl package win
         kubectx
         awscli
         helmfile

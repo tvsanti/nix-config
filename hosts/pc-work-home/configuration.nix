@@ -36,17 +36,17 @@
     [ "/libexec" ]; # links /libexec from derivations to /run/current-system/sw
 
 
+  services.libinput = {
+    enable = true;
+    touchpad.scrollMethod = "edge";
+  };
+  services.displayManager.defaultSession = "xsession";
   services.xserver = {
     videoDrivers = [ "modesetting" ];
     enable = true;
-    libinput = {
-      enable = true;
-      touchpad.scrollMethod = "edge";
-    };
     displayManager = {
       lightdm.enable = true;
       startx.enable = true;
-      defaultSession = "xsession";
       session = [{
         manage = "desktop";
         name = "xsession";
