@@ -101,7 +101,6 @@
         ntfs3g # TODO: In nixos config?
         gnupg
         _1password-cli
-        deluge
         slack
         inetutils # for telnet (TODO: In cli-essentials.nix?)
         krew
@@ -119,11 +118,9 @@
         vagrant
         podman-compose
         go
-        discord
         ledger-live-desktop
         eksctl
         postman
-        teams-for-linux
         claude-code
         devenv
         inputs.opencode.packages.${pkgs.system}.default
