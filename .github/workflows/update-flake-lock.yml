@@ -14,6 +14,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: DeterminateSystems/nix-installer-action@main
+      # PRs opened by this workflow's GITHUB_TOKEN don't trigger the check
+      # workflow (GitHub anti-recursion rule), so validate the updated lock
+      # here before opening the PR.
+      - run: nix flake update
+      - run: nix flake check
       - uses: DeterminateSystems/update-flake-lock@main
         with:
           pr-title: "chore: update flake.lock"
