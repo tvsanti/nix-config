@@ -1,5 +1,5 @@
 {
-  home-manager.users.santiago = { pkgs, inputs, ... }: {
+  home-manager.users.santiago = { pkgs, ... }: {
     imports = [ ./alacritty.nix ./screens.nix ];
     # Allow unfree packages
     xsession = {
@@ -123,7 +123,6 @@
         postman
         claude-code
         devenv
-        inputs.opencode.packages.${pkgs.system}.default
         clang # I just need it to build tree-sitter grammars in emacs
         lxappearance
         # TODO: Maybe put this somewhere else
@@ -145,7 +144,7 @@
       syntaxHighlighting.enable = true;
       shellAliases = {
         ll = "ls -l";
-        update = "sudo nixos-rebuild switch";
+        update = "sudo nixos-rebuild switch --flake /home/santiago/dotfiles/nix-config";
         k = "kubectl";
       };
       defaultKeymap = "emacs";
@@ -178,12 +177,14 @@
 
     programs.git = {
       enable = true;
-      userName = "tvsanti";
-      userEmail = "santithevenetvalles@gmail.com";
-      aliases = {
-        co = "checkout";
-        ss = "status";
-        cm = "commit -m";
+      settings = {
+        user.name = "tvsanti";
+        user.email = "santithevenetvalles@gmail.com";
+        alias = {
+          co = "checkout";
+          ss = "status";
+          cm = "commit -m";
+        };
       };
     };
     programs.mpv = {
@@ -195,6 +196,10 @@
     };
     # Install firefox.
     programs.firefox.enable = true;
+    # Keep the profile in ~/.mozilla/firefox (pre-26.05 default) instead of
+    # migrating it to $XDG_CONFIG_HOME; moving it would require manually
+    # relocating the existing profile on every machine.
+    programs.firefox.configPath = ".mozilla/firefox";
 
     programs.chromium.enable = true;
 
