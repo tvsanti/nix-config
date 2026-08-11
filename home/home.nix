@@ -200,6 +200,15 @@
     # migrating it to $XDG_CONFIG_HOME; moving it would require manually
     # relocating the existing profile on every machine.
     programs.firefox.configPath = ".mozilla/firefox";
+    programs.firefox.policies = {
+      WebsiteFilter = {
+        Block = [
+          "*://*.youtube.com/*"
+          "*://youtu.be/*"
+          "*://*.linkedin.com/*"
+        ];
+      };
+    };
 
     programs.chromium.enable = true;
 
