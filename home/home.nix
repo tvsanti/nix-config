@@ -122,6 +122,7 @@
         eksctl
         postman
         claude-code
+        herdr
         devenv
         clang # I just need it to build tree-sitter grammars in emacs
         lxappearance
