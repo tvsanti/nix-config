@@ -153,6 +153,7 @@
         postman
         claude-code
         herdr
+        (import ./orca.nix { inherit pkgs; }) # AppImage-wrapped, see orca.nix
         devenv
         clang # I just need it to build tree-sitter grammars in emacs
         lxappearance
