@@ -1,6 +1,9 @@
 {
-  home-manager.users.santiago = { pkgs, ... }: {
-    imports = [ ./alacritty.nix ./screens.nix ];
+  home-manager.users.santiago = { pkgs, lib, ... }: {
+    imports = [
+      ./alacritty.nix
+      ./screens.nix
+    ];
     # Allow unfree packages
     xsession = {
       enable = true;
@@ -11,6 +14,10 @@
           window.titlebar = false;
           terminal = "alacritty";
           menu = "rofi -show run";
+          keybindings = lib.mkOptionDefault {
+            "Print" = "exec --no-startup-id screenshot-clip";
+            "Shift+Print" = "exec --no-startup-id screenshot-clip --full";
+          };
         };
       };
     };
@@ -23,7 +30,9 @@
       };
 
       modules = {
-        ipv6 = { position = 1; };
+        ipv6 = {
+          position = 1;
+        };
 
         "wireless _first_" = {
           position = 2;
@@ -43,7 +52,9 @@
 
         "battery all" = {
           position = 4;
-          settings = { format = "%status %percentage %remaining"; };
+          settings = {
+            format = "%status %percentage %remaining";
+          };
         };
 
         "volume master" = {
@@ -57,12 +68,16 @@
 
         "disk /" = {
           position = 6;
-          settings = { format = "%avail"; };
+          settings = {
+            format = "%avail";
+          };
         };
 
         load = {
           position = 7;
-          settings = { format = "%1min"; };
+          settings = {
+            format = "%1min";
+          };
         };
 
         memory = {
@@ -76,7 +91,9 @@
 
         "tztime local" = {
           position = 9;
-          settings = { format = "%Y-%m-%d %H:%M:%S"; };
+          settings = {
+            format = "%Y-%m-%d %H:%M:%S";
+          };
         };
       };
     };
@@ -87,7 +104,8 @@
     };
 
     nixpkgs.config.allowUnfree = true;
-    home.packages = with pkgs;
+    home.packages =
+      with pkgs;
       [
         pkgs.nixfmt
         xsel # managing Xorg clipboard
@@ -95,6 +113,18 @@
         anki
         zathura # pdf reader
         scrot # making screenshots
+        maim # screenshots with region selection
+        xclip # clipboard with image support (needed by screenshot-clip)
+        # Screenshot to clipboard: select a region (or --full for the whole
+        # screen) and paste it anywhere with Ctrl+V. Bound to Print/Shift+Print.
+        (writeShellScriptBin "screenshot-clip" ''
+          set -euo pipefail
+          if [ "''${1:-}" = "--full" ]; then
+            ${maim}/bin/maim -u
+          else
+            ${maim}/bin/maim -s -u
+          fi | ${xclip}/bin/xclip -selection clipboard -t image/png
+        '')
         cloc # count lines of code
         pavucontrol
         python3 # TODO: In nixos config?
@@ -127,15 +157,17 @@
         clang # I just need it to build tree-sitter grammars in emacs
         lxappearance
         # TODO: Maybe put this somewhere else
-        (google-cloud-sdk.withExtraComponents
-          ([ google-cloud-sdk.components.app-engine-go ]))
+        (google-cloud-sdk.withExtraComponents ([ google-cloud-sdk.components.app-engine-go ]))
 
         pgcli
         jrnl
-      ] ++ import ./cli-essentials.nix { inherit pkgs; };
+      ]
+      ++ import ./cli-essentials.nix { inherit pkgs; };
 
     services.sxhkd.enable = true;
-    services.sxhkd.keybindings = { "super + o" = "firefox"; };
+    services.sxhkd.keybindings = {
+      "super + o" = "firefox";
+    };
 
     programs.fzf.enable = true;
     programs.zsh = {
@@ -159,7 +191,9 @@
 
     programs.starship = {
       enable = true;
-      settings = { add_newline = false; };
+      settings = {
+        add_newline = false;
+      };
     };
 
     programs.vscode = {
