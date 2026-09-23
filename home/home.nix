@@ -141,7 +141,7 @@
         kubectl
         (lib.lowPrio minikube) # minikube bundles its own kubectl; let the kubectl package win
         kubectx
-        awscli
+        awscli2
         helmfile
         kustomize
         # TODO: Maybe in virtualization
