@@ -10,7 +10,7 @@
   boot.loader.grub.device = "/dev/sda";
   boot.loader.efi.canTouchEfiVariables = false;
 
-  networking.hostName = "pc-xabia-home";
+  networking.hostName = "pc-xabia";
 
   # This value determines the NixOS release from which the default
   # settings for stateful data were taken. Leave it at the release

@@ -9,7 +9,7 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  networking.hostName = "pc-work-home";
+  networking.hostName = "pc-work";
 
   services.udev.packages = [ pkgs.ledger-udev-rules ];
 

@@ -11,7 +11,7 @@
     let
       system = "x86_64-linux";
 
-      hosts = [ "laptop" "pc-work-home" "pc-xabia-home" "pc-work-office" ];
+      hosts = [ "laptop" "pc-work" "pc-xabia" ];
 
       mkHost = hostName:
         nixpkgs.lib.nixosSystem {
