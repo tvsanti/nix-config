@@ -185,6 +185,7 @@
 
       # Move across words with Ctrl + Left/Right
       initContent = ''
+        export GPG_TTY=$(tty)
         bindkey "^[[1;5C" forward-word
         bindkey "^[[1;5D" backward-word
       '';
