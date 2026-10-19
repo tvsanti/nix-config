@@ -6,7 +6,7 @@ switch:
 update:
     nix flake update --flake {{justfile_directory()}}
     sudo nixos-rebuild switch --flake {{justfile_directory()}}
-    git -C {{justfile_directory()}} commit -m "chore: update flake.lock" flake.lock
+    git -C {{justfile_directory()}} diff --quiet flake.lock || git -C {{justfile_directory()}} commit -m "chore: update flake.lock" flake.lock
 
 # Check that every host still evaluates
 check:
