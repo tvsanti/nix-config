@@ -141,6 +141,7 @@
         kubectl
         (lib.lowPrio minikube) # minikube bundles its own kubectl; let the kubectl package win
         kubectx
+        kubectl-cnpg # `k cnpg psql -n <ns> <cluster>`
         awscli2
         helmfile
         kustomize
