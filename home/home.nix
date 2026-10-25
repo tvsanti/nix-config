@@ -244,11 +244,14 @@
           "*://*.youtube.com/*"
           "*://youtu.be/*"
           "*://*.linkedin.com/*"
+          "*://*.idealista.com/*"
+          "*://*.spotify.com/*"
+          "*://*.temu.com/*"
+          "*://*.amazon.es/*"
+          "*://*.amazon.com/*"
         ];
       };
     };
-
-    programs.chromium.enable = true;
 
     # The state version is required and should stay at the version you
     # originally installed.
